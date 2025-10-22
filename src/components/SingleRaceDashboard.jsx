@@ -55,7 +55,7 @@ const SAMPLE_DATA = [
 export default function SingleRaceDashboard({ raceData, raceInfo }) {
   const [activeTab, setActiveTab] = useState('charts');
   const [f, setF] = useState({div: 'all', cat: 'all', gen: 'all', team: 'all', search: ''});
-  const [chartF, setChartF] = useState({div: 'all', team: 'all'});
+  const [chartF, setChartF] = useState({div: 'all', team: 'all', gen: 'all', cat: 'all'});
   const [s, setS] = useState({k: 'PLC', d: 'asc'});
 
   const DATA = raceData || SAMPLE_DATA;
@@ -89,7 +89,9 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
   const chartFiltered = useMemo(() => 
     DATA.filter(x => 
       (chartF.div === 'all' || x.Division === chartF.div) &&
-      (chartF.team === 'all' || x.Team === chartF.team)
+      (chartF.team === 'all' || x.Team === chartF.team) &&
+      (chartF.gen === 'all' || x.GENDER === chartF.gen) &&
+      (chartF.cat === 'all' || x.CAT === chartF.cat)
     ), [chartF]);
 
   const chartData = useMemo(() => {
@@ -376,6 +378,15 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
                   <option value="all">All Teams</option>
                   {u.teams.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
+                <select value={chartF.gen} onChange={(e) => setChartF({...chartF, gen: e.target.value})} className="px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none font-semibold" style={{borderColor: '#800020'}}>
+                  <option value="all">All Genders</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+                <select value={chartF.cat} onChange={(e) => setChartF({...chartF, cat: e.target.value})} className="px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none font-semibold" style={{borderColor: '#800020'}}>
+                  <option value="all">All Categories</option>
+                  {u.cats.map(c => <option key={c} value={c}>{c.length > 20 ? c.slice(0,17)+'...' : c}</option>)}
+                </select>
                 <div className="ml-auto px-4 py-2 bg-white rounded-lg border-2 text-sm font-bold" style={{borderColor: '#FFD700', color: '#800020'}}>
                   📊 {chartFiltered.length} riders
                 </div>
@@ -385,7 +396,7 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
             <div className="p-4 overflow-y-auto bg-gray-50" style={{maxHeight: '75vh'}}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <BarChart data={chartData.byCategory} title="🏁 Riders per Category" color="orange" />
-                <BarChart data={chartData.byTeam} title="🏫 Teams (Top 10)" color="orange" />
+                <BarChart data={chartData.byTeam} title="🏫 Team Racer Count (Top 10)" color="orange" />
                 <BarChart data={chartData.byGender} title="👥 Gender Distribution" color="blue" />
                 <BarChart data={chartData.byGrade} title="🎓 Riders per Grade" color="green" />
                 <BarChart data={chartData.avgLapCategory} title="⏱️ Avg Lap Time by Category (min)" color="purple" />
