@@ -1,0 +1,17 @@
+{
+  "seasons": [
+    {
+      "year": 2025,
+      "name": "2025 Season",
+      "races": [
+        {
+          "id": "2025-cedar-city",
+          "name": "Cedar City State Championship",
+          "date": "2025-10-19",
+          "location": "Cedar City, UT",
+          "file": "2025-cedar-city.json"
+        }
+      ]
+    }
+  ]
+}
