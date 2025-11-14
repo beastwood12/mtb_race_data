@@ -54,7 +54,7 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
     const byTeam = Object.entries(teamCounts).map(([name, count]) => ({
       name: name.length > 20 ? name.slice(0,17)+'...' : name, 
       count
-    })).sort((a,b) => b.count - a.count).slice(0,10);
+    })).sort((a,b) => b.count - a.count);
 
     const genCounts = {};
     d.forEach(x => genCounts[x.GENDER] = (genCounts[x.GENDER] || 0) + 1);
@@ -87,7 +87,18 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
         name: x.NAME
       }));
 
-    return {byCategory, byTeam, byGender, byGrade, avgLapCategory, elevationScatter};
+    // NEW: Scatter plot data - SES (FRL%) vs Race Time
+    const sesScatter = d
+      .filter(x => x.School_FRL_Pct !== undefined && x.TOTAL_TIME > 0)
+      .map(x => ({
+        frlPct: x.School_FRL_Pct,
+        time: x.TOTAL_TIME / 60, // Convert to minutes
+        team: x.Team,
+        name: x.NAME,
+        sesCategory: x.School_SES_Category
+      }));
+
+    return {byCategory, byTeam, byGender, byGrade, avgLapCategory, elevationScatter, sesScatter};
   }, [chartFiltered]);
 
   const u = useMemo(() => ({
@@ -103,12 +114,12 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
 
   const fmt = (sec) => sec > 0 ? `${Math.floor(sec/60)}:${String(Math.floor(sec%60)).padStart(2,'0')}` : '-';
 
-  const BarChart = ({data, title, color = 'orange'}) => {
+  const BarChart = ({data, title, color = 'orange', scrollable = false}) => {
     const max = Math.max(...data.map(d => parseFloat(d.count || d.avg)));
     return (
       <div className="bg-white p-3 rounded-lg shadow-md border border-gray-200">
         <h3 className="font-bold text-sm mb-3 text-gray-700">{title}</h3>
-        <div className="space-y-1">
+        <div className={scrollable ? "overflow-y-auto space-y-1" : "space-y-1"} style={scrollable ? {maxHeight: '400px'} : {}}>
           {data.map((item, i) => (
             <div key={i} className="flex items-center gap-2">
               <div className="text-xs w-32 truncate" title={item.name}>{item.name}</div>
@@ -151,9 +162,9 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
     return (
       <div className="bg-white p-3 rounded-lg shadow-md border border-gray-200">
         <h3 className="font-bold text-sm mb-3 text-gray-700">{title}</h3>
-        <div className="relative" style={{height: '300px', padding: '20px 40px 40px 50px'}}>
+        <div className="relative" style={{height: '300px', padding: '20px 40px 40px 60px'}}>
           {/* Y-axis label */}
-          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-semibold text-gray-600">
+          <div className="absolute left-2 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-semibold text-gray-600">
             School Elevation (feet)
           </div>
           
@@ -197,6 +208,78 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
         </div>
         <div className="text-xs text-gray-500 mt-2 text-center">
           Each dot represents a rider • Hover for details
+        </div>
+      </div>
+    );
+  };
+
+  const SESScatterPlot = ({data, title}) => {
+    if (!data || data.length === 0) {
+      return (
+        <div className="bg-white p-3 rounded-lg shadow-md border border-gray-200">
+          <h3 className="font-bold text-sm mb-3 text-gray-700">{title}</h3>
+          <div className="text-sm text-gray-500 text-center py-8">No socio-economic data available</div>
+        </div>
+      );
+    }
+
+    const minFRL = Math.min(...data.map(d => d.frlPct));
+    const maxFRL = Math.max(...data.map(d => d.frlPct));
+    const minTime = Math.min(...data.map(d => d.time));
+    const maxTime = Math.max(...data.map(d => d.time));
+    
+    const frlRange = maxFRL - minFRL;
+    const timeRange = maxTime - minTime;
+
+    return (
+      <div className="bg-white p-3 rounded-lg shadow-md border border-gray-200">
+        <h3 className="font-bold text-sm mb-3 text-gray-700">{title}</h3>
+        <div className="relative" style={{height: '300px', padding: '20px 40px 40px 60px'}}>
+          {/* Y-axis label */}
+          <div className="absolute left-2 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-semibold text-gray-600">
+            Free/Reduced Lunch % (Higher = Lower SES)
+          </div>
+          
+          {/* X-axis label */}
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-gray-600">
+            Race Time (minutes)
+          </div>
+
+          {/* Plot area */}
+          <div className="relative w-full h-full border-l-2 border-b-2 border-gray-300">
+            {/* Y-axis ticks */}
+            <div className="absolute left-0 top-0 -ml-10 text-xs text-gray-600">{maxFRL}%</div>
+            <div className="absolute left-0 top-1/2 -ml-10 text-xs text-gray-600">{Math.round((maxFRL + minFRL) / 2)}%</div>
+            <div className="absolute left-0 bottom-0 -ml-10 text-xs text-gray-600">{minFRL}%</div>
+
+            {/* X-axis ticks */}
+            <div className="absolute bottom-0 left-0 -mb-6 text-xs text-gray-600">{Math.round(minTime)}</div>
+            <div className="absolute bottom-0 left-1/2 -ml-8 -mb-6 text-xs text-gray-600">{Math.round((maxTime + minTime) / 2)}</div>
+            <div className="absolute bottom-0 right-0 -mb-6 text-xs text-gray-600">{Math.round(maxTime)}</div>
+
+            {/* Data points */}
+            {data.map((point, i) => {
+              const x = ((point.time - minTime) / timeRange) * 100;
+              const y = 100 - ((point.frlPct - minFRL) / frlRange) * 100;
+              
+              return (
+                <div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full cursor-pointer hover:scale-150 transition-transform"
+                  style={{
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    backgroundColor: '#228B22',
+                    opacity: 0.6
+                  }}
+                  title={`${point.team}: ${point.frlPct}% FRL (${point.sesCategory}), ${point.time.toFixed(1)} min`}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="text-xs text-gray-500 mt-2 text-center">
+          Each dot represents a rider • Hover for details • Lower FRL% = Higher SES
         </div>
       </div>
     );
@@ -344,12 +427,15 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
             <div className="p-4 overflow-y-auto bg-gray-50" style={{maxHeight: '75vh'}}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <BarChart data={chartData.byCategory} title="🏁 Riders per Category" color="orange" />
-                <BarChart data={chartData.byTeam} title="🏫 Riders Per Team" color="orange" />
+                <BarChart data={chartData.byTeam} title="🏫 Riders Per Team" color="orange" scrollable={true} />
                 <BarChart data={chartData.byGender} title="👥 Gender Distribution" color="blue" />
                 <BarChart data={chartData.byGrade} title="🎓 Riders per Grade" color="green" />
                 <BarChart data={chartData.avgLapCategory} title="⏱️ Avg Lap Time by Category (min)" color="purple" />
                 <div className="lg:col-span-2">
                   <ScatterPlot data={chartData.elevationScatter} title="🏔️ School Elevation vs. Race Time" />
+                </div>
+                <div className="lg:col-span-2">
+                  <SESScatterPlot data={chartData.sesScatter} title="💰 Socio-Economic Status vs. Race Time" />
                 </div>
               </div>
             </div>
