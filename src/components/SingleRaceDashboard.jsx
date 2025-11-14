@@ -162,48 +162,64 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
     return (
       <div className="bg-white p-3 rounded-lg shadow-md border border-gray-200">
         <h3 className="font-bold text-sm mb-3 text-gray-700">{title}</h3>
-        <div className="relative" style={{height: '300px', padding: '20px 40px 40px 60px'}}>
-          {/* Y-axis label */}
-          <div className="absolute left-2 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-semibold text-gray-600">
-            School Elevation (feet)
+        <div className="flex items-center" style={{height: '350px'}}>
+          {/* Y-axis label - completely outside on left */}
+          <div style={{
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)',
+            fontSize: '11px',
+            fontWeight: '600',
+            color: '#4b5563',
+            marginRight: '8px',
+            textAlign: 'center',
+            width: '30px',
+            flexShrink: 0
+          }}>
+            Elevation (feet)
           </div>
           
-          {/* X-axis label */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-gray-600">
-            Race Time (minutes)
-          </div>
+          {/* Chart container */}
+          <div className="flex-1 relative" style={{height: '100%', paddingBottom: '40px'}}>
+            {/* X-axis label */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-gray-600">
+              Race Time (minutes)
+            </div>
 
-          {/* Plot area */}
-          <div className="relative w-full h-full border-l-2 border-b-2 border-gray-300">
-            {/* Y-axis ticks */}
-            <div className="absolute left-0 top-0 -ml-10 text-xs text-gray-600">{maxElev.toLocaleString()}</div>
-            <div className="absolute left-0 top-1/2 -ml-10 text-xs text-gray-600">{Math.round((maxElev + minElev) / 2).toLocaleString()}</div>
-            <div className="absolute left-0 bottom-0 -ml-10 text-xs text-gray-600">{minElev.toLocaleString()}</div>
+            {/* Plot area with padding to keep dots inside */}
+            <div className="relative w-full h-full" style={{paddingLeft: '52px', paddingTop: '10px', paddingBottom: '20px', paddingRight: '10px'}}>
+              <div className="relative w-full h-full border-l-2 border-b-2 border-gray-300">
+                {/* Y-axis ticks */}
+                <div className="absolute -left-10 top-0 text-xs text-gray-600">{maxElev.toLocaleString()}</div>
+                <div className="absolute -left-10 top-1/2 text-xs text-gray-600">{Math.round((maxElev + minElev) / 2).toLocaleString()}</div>
+                <div className="absolute -left-10 bottom-0 text-xs text-gray-600">{minElev.toLocaleString()}</div>
 
-            {/* X-axis ticks */}
-            <div className="absolute bottom-0 left-0 -mb-6 text-xs text-gray-600">{Math.round(minTime)}</div>
-            <div className="absolute bottom-0 left-1/2 -ml-8 -mb-6 text-xs text-gray-600">{Math.round((maxTime + minTime) / 2)}</div>
-            <div className="absolute bottom-0 right-0 -mb-6 text-xs text-gray-600">{Math.round(maxTime)}</div>
+                {/* X-axis ticks */}
+                <div className="absolute bottom-0 left-0 -mb-5 text-xs text-gray-600">{Math.round(minTime)}</div>
+                <div className="absolute bottom-0 left-1/2 -ml-8 -mb-5 text-xs text-gray-600">{Math.round((maxTime + minTime) / 2)}</div>
+                <div className="absolute bottom-0 right-0 -mb-5 text-xs text-gray-600">{Math.round(maxTime)}</div>
 
-            {/* Data points */}
-            {data.map((point, i) => {
-              const x = ((point.time - minTime) / timeRange) * 100;
-              const y = 100 - ((point.elevation - minElev) / elevRange) * 100;
-              
-              return (
-                <div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full cursor-pointer hover:scale-150 transition-transform"
-                  style={{
-                    left: `${x}%`,
-                    top: `${y}%`,
-                    backgroundColor: '#800020',
-                    opacity: 0.6
-                  }}
-                  title={`${point.team}: ${point.elevation.toLocaleString()} ft, ${point.time.toFixed(1)} min`}
-                />
-              );
-            })}
+                {/* Data points - with 5% margin from edges */}
+                {data.map((point, i) => {
+                  const x = 5 + ((point.time - minTime) / timeRange) * 90;
+                  const y = 95 - ((point.elevation - minElev) / elevRange) * 90;
+                  
+                  return (
+                    <div
+                      key={i}
+                      className="absolute w-2 h-2 rounded-full cursor-pointer hover:scale-150 transition-transform"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        backgroundColor: '#800020',
+                        opacity: 0.6,
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                      title={`${point.team}: ${point.elevation.toLocaleString()} ft, ${point.time.toFixed(1)} min`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
         <div className="text-xs text-gray-500 mt-2 text-center">
@@ -234,48 +250,64 @@ export default function SingleRaceDashboard({ raceData, raceInfo }) {
     return (
       <div className="bg-white p-3 rounded-lg shadow-md border border-gray-200">
         <h3 className="font-bold text-sm mb-3 text-gray-700">{title}</h3>
-        <div className="relative" style={{height: '300px', padding: '20px 40px 40px 60px'}}>
-          {/* Y-axis label */}
-          <div className="absolute left-2 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-semibold text-gray-600">
-            Free/Reduced Lunch % (Higher = Lower SES)
+        <div className="flex items-center" style={{height: '350px'}}>
+          {/* Y-axis label - completely outside on left */}
+          <div style={{
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)',
+            fontSize: '11px',
+            fontWeight: '600',
+            color: '#4b5563',
+            marginRight: '8px',
+            textAlign: 'center',
+            width: '30px',
+            flexShrink: 0
+          }}>
+            FRL % (Higher = Lower SES)
           </div>
           
-          {/* X-axis label */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-gray-600">
-            Race Time (minutes)
-          </div>
+          {/* Chart container */}
+          <div className="flex-1 relative" style={{height: '100%', paddingBottom: '40px'}}>
+            {/* X-axis label */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs font-semibold text-gray-600">
+              Race Time (minutes)
+            </div>
 
-          {/* Plot area */}
-          <div className="relative w-full h-full border-l-2 border-b-2 border-gray-300">
-            {/* Y-axis ticks */}
-            <div className="absolute left-0 top-0 -ml-10 text-xs text-gray-600">{maxFRL}%</div>
-            <div className="absolute left-0 top-1/2 -ml-10 text-xs text-gray-600">{Math.round((maxFRL + minFRL) / 2)}%</div>
-            <div className="absolute left-0 bottom-0 -ml-10 text-xs text-gray-600">{minFRL}%</div>
+            {/* Plot area with padding to keep dots inside */}
+            <div className="relative w-full h-full" style={{paddingLeft: '42px', paddingTop: '10px', paddingBottom: '20px', paddingRight: '10px'}}>
+              <div className="relative w-full h-full border-l-2 border-b-2 border-gray-300">
+                {/* Y-axis ticks */}
+                <div className="absolute -left-8 top-0 text-xs text-gray-600">{maxFRL}%</div>
+                <div className="absolute -left-8 top-1/2 text-xs text-gray-600">{Math.round((maxFRL + minFRL) / 2)}%</div>
+                <div className="absolute -left-8 bottom-0 text-xs text-gray-600">{minFRL}%</div>
 
-            {/* X-axis ticks */}
-            <div className="absolute bottom-0 left-0 -mb-6 text-xs text-gray-600">{Math.round(minTime)}</div>
-            <div className="absolute bottom-0 left-1/2 -ml-8 -mb-6 text-xs text-gray-600">{Math.round((maxTime + minTime) / 2)}</div>
-            <div className="absolute bottom-0 right-0 -mb-6 text-xs text-gray-600">{Math.round(maxTime)}</div>
+                {/* X-axis ticks */}
+                <div className="absolute bottom-0 left-0 -mb-5 text-xs text-gray-600">{Math.round(minTime)}</div>
+                <div className="absolute bottom-0 left-1/2 -ml-8 -mb-5 text-xs text-gray-600">{Math.round((maxTime + minTime) / 2)}</div>
+                <div className="absolute bottom-0 right-0 -mb-5 text-xs text-gray-600">{Math.round(maxTime)}</div>
 
-            {/* Data points */}
-            {data.map((point, i) => {
-              const x = ((point.time - minTime) / timeRange) * 100;
-              const y = 100 - ((point.frlPct - minFRL) / frlRange) * 100;
-              
-              return (
-                <div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full cursor-pointer hover:scale-150 transition-transform"
-                  style={{
-                    left: `${x}%`,
-                    top: `${y}%`,
-                    backgroundColor: '#228B22',
-                    opacity: 0.6
-                  }}
-                  title={`${point.team}: ${point.frlPct}% FRL (${point.sesCategory}), ${point.time.toFixed(1)} min`}
-                />
-              );
-            })}
+                {/* Data points - with 5% margin from edges */}
+                {data.map((point, i) => {
+                  const x = 5 + ((point.time - minTime) / timeRange) * 90;
+                  const y = 95 - ((point.frlPct - minFRL) / frlRange) * 90;
+                  
+                  return (
+                    <div
+                      key={i}
+                      className="absolute w-2 h-2 rounded-full cursor-pointer hover:scale-150 transition-transform"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        backgroundColor: '#228B22',
+                        opacity: 0.6,
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                      title={`${point.team}: ${point.frlPct}% FRL (${point.sesCategory}), ${point.time.toFixed(1)} min`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
         <div className="text-xs text-gray-500 mt-2 text-center">
