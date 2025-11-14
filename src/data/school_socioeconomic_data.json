@@ -1,0 +1,334 @@
+{
+  "Alta High School": {
+    "frl_pct": 22,
+    "ses_category": "Medium-High SES"
+  },
+  "American Fork HS": {
+    "frl_pct": 28,
+    "ses_category": "Medium-High SES"
+  },
+  "Bingham HS": {
+    "frl_pct": 25,
+    "ses_category": "Medium-High SES"
+  },
+  "Bonneville HS": {
+    "frl_pct": 46,
+    "ses_category": "Medium-Low SES"
+  },
+  "Bountiful High School": {
+    "frl_pct": 27,
+    "ses_category": "Medium-High SES"
+  },
+  "Box Elder Comp": {
+    "frl_pct": 45,
+    "ses_category": "Medium-Low SES"
+  },
+  "Brighton HS": {
+    "frl_pct": 23,
+    "ses_category": "Medium-High SES"
+  },
+  "Carbon": {
+    "frl_pct": 65,
+    "ses_category": "Rural/Lower SES"
+  },
+  "Cedar HS": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "Cedar Valley": {
+    "frl_pct": 28,
+    "ses_category": "Medium-High SES"
+  },
+  "Clearfield": {
+    "frl_pct": 42,
+    "ses_category": "Medium SES"
+  },
+  "Copper Hills HS": {
+    "frl_pct": 28,
+    "ses_category": "Medium-High SES"
+  },
+  "Corner Canyon HS": {
+    "frl_pct": 12,
+    "ses_category": "High SES"
+  },
+  "CottonCrest Composite": {
+    "frl_pct": 45,
+    "ses_category": "Medium-Low SES"
+  },
+  "Creek Valley Composite": {
+    "frl_pct": 46,
+    "ses_category": "Medium-Low SES"
+  },
+  "Crimson Cliffs": {
+    "frl_pct": 30,
+    "ses_category": "Medium-High SES"
+  },
+  "Davis HS": {
+    "frl_pct": 28,
+    "ses_category": "Medium-High SES"
+  },
+  "Desert Hills Thunder": {
+    "frl_pct": 32,
+    "ses_category": "Medium SES"
+  },
+  "Dixie Flyers": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "East HS": {
+    "frl_pct": 44,
+    "ses_category": "Medium-Low SES"
+  },
+  "Enterprise": {
+    "frl_pct": 54,
+    "ses_category": "Rural"
+  },
+  "Farmington": {
+    "frl_pct": 25,
+    "ses_category": "Medium-High SES"
+  },
+  "Fremont High School": {
+    "frl_pct": 36,
+    "ses_category": "Medium SES"
+  },
+  "Green Canyon High School": {
+    "frl_pct": 45,
+    "ses_category": "Lower SES"
+  },
+  "Gunnison Valley Bulldogs": {
+    "frl_pct": 62,
+    "ses_category": "Rural/Lower SES"
+  },
+  "Herriman": {
+    "frl_pct": 26,
+    "ses_category": "Medium-High SES"
+  },
+  "Highland High School": {
+    "frl_pct": 47,
+    "ses_category": "Medium-Low SES"
+  },
+  "Hurricane": {
+    "frl_pct": 40,
+    "ses_category": "Medium SES"
+  },
+  "Iron County Comp": {
+    "frl_pct": 50,
+    "ses_category": "Rural"
+  },
+  "Jordan High School": {
+    "frl_pct": 36,
+    "ses_category": "Medium SES"
+  },
+  "Juan Diego Catholic High School": {
+    "frl_pct": 16,
+    "ses_category": "High SES"
+  },
+  "Judge Memorial Catholic High School": {
+    "frl_pct": 18,
+    "ses_category": "High SES"
+  },
+  "Kanab Composite": {
+    "frl_pct": 56,
+    "ses_category": "Rural"
+  },
+  "Layton High School Mountain Biking Team": {
+    "frl_pct": 29,
+    "ses_category": "Medium-High SES"
+  },
+  "Lehi HS": {
+    "frl_pct": 25,
+    "ses_category": "Medium-High SES"
+  },
+  "Logan High School": {
+    "frl_pct": 52,
+    "ses_category": "Lower SES"
+  },
+  "Lone Peak HS": {
+    "frl_pct": 15,
+    "ses_category": "High SES"
+  },
+  "Manti": {
+    "frl_pct": 60,
+    "ses_category": "Rural/Lower SES"
+  },
+  "Maple Mountain HS": {
+    "frl_pct": 32,
+    "ses_category": "Medium SES"
+  },
+  "Moab Red Devils": {
+    "frl_pct": 48,
+    "ses_category": "Rural"
+  },
+  "Morgan HS": {
+    "frl_pct": 35,
+    "ses_category": "Medium SES"
+  },
+  "Mountain Crest HS": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "Mountain Ridge": {
+    "frl_pct": 23,
+    "ses_category": "Medium-High SES"
+  },
+  "Mountain View High School": {
+    "frl_pct": 34,
+    "ses_category": "Medium SES"
+  },
+  "Murray/Taylorsville/West Jordan Comp": {
+    "frl_pct": 51,
+    "ses_category": "Medium-Low SES"
+  },
+  "North Summit High School": {
+    "frl_pct": 42,
+    "ses_category": "Rural"
+  },
+  "Northridge": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "Ogden High School Mountain Bike Team": {
+    "frl_pct": 55,
+    "ses_category": "Medium-Low SES"
+  },
+  "Olympus HS": {
+    "frl_pct": 24,
+    "ses_category": "Medium-High SES"
+  },
+  "Orem HS": {
+    "frl_pct": 37,
+    "ses_category": "Medium SES"
+  },
+  "Panguitch Bobcats": {
+    "frl_pct": 68,
+    "ses_category": "Rural/Lower SES"
+  },
+  "Park City High School": {
+    "frl_pct": 20,
+    "ses_category": "High SES"
+  },
+  "Payson HS": {
+    "frl_pct": 42,
+    "ses_category": "Medium SES"
+  },
+  "Pine View Panthers": {
+    "frl_pct": 28,
+    "ses_category": "Medium-High SES"
+  },
+  "Pleasant Grove Biking Vikings": {
+    "frl_pct": 27,
+    "ses_category": "Medium-High SES"
+  },
+  "Provo Composite": {
+    "frl_pct": 40,
+    "ses_category": "Medium SES"
+  },
+  "Ridgeline HS": {
+    "frl_pct": 42,
+    "ses_category": "Lower SES"
+  },
+  "Riverton HS": {
+    "frl_pct": 24,
+    "ses_category": "Medium-High SES"
+  },
+  "Roy High School": {
+    "frl_pct": 40,
+    "ses_category": "Medium SES"
+  },
+  "Saint Joseph Catholic HS/MS": {
+    "frl_pct": 20,
+    "ses_category": "High SES"
+  },
+  "Salem Hills HS": {
+    "frl_pct": 33,
+    "ses_category": "Medium SES"
+  },
+  "Salt Lake Center for Science Education": {
+    "frl_pct": 42,
+    "ses_category": "Medium-Low SES"
+  },
+  "Sevier Valley Composite": {
+    "frl_pct": 62,
+    "ses_category": "Rural/Lower SES"
+  },
+  "Sky View High School": {
+    "frl_pct": 48,
+    "ses_category": "Lower SES"
+  },
+  "Skyline": {
+    "frl_pct": 26,
+    "ses_category": "Medium-High SES"
+  },
+  "Skyridge HS": {
+    "frl_pct": 18,
+    "ses_category": "High SES"
+  },
+  "Snow Canyon HS": {
+    "frl_pct": 35,
+    "ses_category": "Medium SES"
+  },
+  "South Summit HS": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "Spanish Fork HS": {
+    "frl_pct": 35,
+    "ses_category": "Medium SES"
+  },
+  "Springville HS": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "Syracuse": {
+    "frl_pct": 24,
+    "ses_category": "Medium-High SES"
+  },
+  "Timpanogos HS": {
+    "frl_pct": 34,
+    "ses_category": "Medium SES"
+  },
+  "Timpview HS": {
+    "frl_pct": 36,
+    "ses_category": "Medium SES"
+  },
+  "Tooele Valley Composite": {
+    "frl_pct": 52,
+    "ses_category": "Medium-Low SES"
+  },
+  "Velociraptors Composite": {
+    "frl_pct": 44,
+    "ses_category": "Medium-Low SES"
+  },
+  "Viewmont High School": {
+    "frl_pct": 26,
+    "ses_category": "Medium-High SES"
+  },
+  "Wasatch Mountain Bike Team": {
+    "frl_pct": 38,
+    "ses_category": "Medium SES"
+  },
+  "Weber High School": {
+    "frl_pct": 39,
+    "ses_category": "Medium SES"
+  },
+  "West Field High School": {
+    "frl_pct": 50,
+    "ses_category": "Medium-Low SES"
+  },
+  "West Granite Composite": {
+    "frl_pct": 52,
+    "ses_category": "Medium-Low SES"
+  },
+  "West High School Mountain Bike Team": {
+    "frl_pct": 48,
+    "ses_category": "Medium-Low SES"
+  },
+  "Westlake Rolling Thunder": {
+    "frl_pct": 35,
+    "ses_category": "Medium SES"
+  },
+  "Woods Cross High School": {
+    "frl_pct": 37,
+    "ses_category": "Medium SES"
+  }
+}
